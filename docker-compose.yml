@@ -3,8 +3,10 @@ services:
   bot:
     build: .
     ports:
-      - "3000:3000"
+      - "${PORT}:${PORT}"
     environment:
+      PORT: ${PORT}
+      CORS_ORIGINS: ${CORS_ORIGINS}
       TELEGRAM_BOT_TOKEN: ${TELEGRAM_BOT_TOKEN}
       TELEGRAM_CHAT_ID: ${TELEGRAM_CHAT_ID}
     env_file:

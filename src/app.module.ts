@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
+
 import { BotModule } from './bot/bot.module';
 
 @Module({
@@ -8,4 +9,5 @@ import { BotModule } from './bot/bot.module';
     BotModule,
   ],
 })
+
 export class AppModule {}

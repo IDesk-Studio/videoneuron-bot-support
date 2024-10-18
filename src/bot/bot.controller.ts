@@ -1,4 +1,5 @@
 import { Controller, Post, Body, BadRequestException } from '@nestjs/common';
+
 import { BotService } from './bot.service';
 
 @Controller('bot')
@@ -15,9 +16,7 @@ export class BotController {
     }
 
     const formattedMessage = `
-      👋 New message !
-      Email: ${email}
-      Message: ${message}
+      New notification: \n- Email: ${email} \n- Message: ${message}
     `;
 
     await this.botService.sendMessage(formattedMessage);
