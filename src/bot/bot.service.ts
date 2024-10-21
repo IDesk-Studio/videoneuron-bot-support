@@ -15,11 +15,11 @@ export class BotService {
     this.bot = new TelegramBot(token, { polling: true });
 
     this.bot.onText(/\/start/, (msg) => {
-      this.bot.sendMessage(msg.chat.id, 'The bot has been successfully launched!');
+      this.bot.sendMessage(msg.chat.id, '🤖 The bug reporting bot has been successfully launched!');
     });
   }
 
   async sendMessage(message: string): Promise<void> {
-    await this.bot.sendMessage(this.chatId, message);
+    await this.bot.sendMessage(this.chatId, message, { parse_mode: 'markdown' });
   }
 }

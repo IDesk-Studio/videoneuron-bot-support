@@ -8,16 +8,25 @@ export class BotController {
 
   @Post('submit-form')
   async submitForm(
+    @Body('userId') userId: string,
     @Body('email') email: string,
+    @Body('projectId') projectId: string,
+    @Body('errorMessage') errorMessage: string | null,
     @Body('message') message: string,
   ) {
-    if (!email || !message) {
+    if (!userId || !email || !projectId || !message) {
       throw new BadRequestException('All fields of the form must be filled in');
     }
 
-    const formattedMessage = `
-      New notification: \n- Email: ${email} \n- Message: ${message}
-    `;
+    const errorPart = errorMessage ? `\`\`\`${errorMessage}\`\`\`` : 'отсутствует 😱';
+
+    const formattedMessage = 
+      `⚠️ Уведомление об ошибке:\n` +
+      `- Id пользователя: ${userId}\n` +
+      `- Почта пользователя: ${email}\n` +
+      `- Id проекта: ${projectId}\n` +
+      `- Сообщение от пользователя: ${message}\n` +
+      `- Сообщение об ошибке: ${errorPart}`;
 
     await this.botService.sendMessage(formattedMessage);
 
